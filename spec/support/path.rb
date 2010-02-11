@@ -26,6 +26,10 @@ module Spec
       root.join(*path)
     end
 
+    def gem_path(root, *path)
+      bundled_app(root).join("#{Gem.ruby_engine}/#{Gem::ConfigMap[:ruby_version]}/gems", *path)
+    end
+
     def base_system_gems
       tmp.join("gems/base")
     end

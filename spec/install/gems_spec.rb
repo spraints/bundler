@@ -209,7 +209,7 @@ describe "gemfile install with gem sources" do
 
       bundle :install
 
-      bundled_app('vendor/gems/rack-1.0.0').should be_directory
+      gem_path('vendor', 'rack-1.0.0').should be_directory
       should_be_installed "rack 1.0.0"
     end
 
@@ -218,7 +218,7 @@ describe "gemfile install with gem sources" do
 
       bundle :install
 
-      bundled_app('vendor/gems/rack-1.0.0').should be_directory
+      gem_path('vendor', 'rack-1.0.0').should be_directory
       should_be_installed "rack 1.0.0"
     end
 
@@ -230,14 +230,14 @@ describe "gemfile install with gem sources" do
         bundle :install
       end
 
-      bundled_app('vendor/gems/rack-1.0.0').should be_directory
+      gem_path('vendor', 'rack-1.0.0').should be_directory
       should_be_installed "rack 1.0.0"
     end
 
     it "sets BUNDLE_PATH as the first argument to bundle install" do
       bundle "install ./vendor"
 
-      bundled_app('vendor/gems/rack-1.0.0').should be_directory
+      gem_path('vendor', 'rack-1.0.0').should be_directory
       should_be_installed "rack 1.0.0"
     end
 
@@ -245,7 +245,7 @@ describe "gemfile install with gem sources" do
       build_gem "rack", "1.1.0", :to_system => true
       bundle "install ./vendor"
 
-      bundled_app('vendor/gems/rack-1.1.0').should_not be_directory
+      gem_path('vendor', 'rack-1.1.0').should_not be_directory
       should_be_installed "rack 1.1.0"
     end
   end
@@ -277,7 +277,7 @@ describe "gemfile install with gem sources" do
       FileUtils.rm_rf bundled_app('vendor/gems')
       bundle "install"
 
-      bundled_app('vendor/gems/gems/rack-1.0.0').should be_directory
+      gem_path('vendor/gems', 'rack-1.0.0').should be_directory
       should_be_installed "rack 1.0.0"
     end
   end
