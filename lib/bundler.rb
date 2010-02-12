@@ -56,7 +56,7 @@ module Bundler
 
     def bundle_path
       @bundle_path ||= begin
-        path = settings[:path] || "#{Gem.user_home}/.bundle"
+        path = settings[:path] || "#{Gem.user_home}/.bundle/#{Gem.ruby_engine}/#{Gem::ConfigMap[:ruby_version]}"
         Pathname.new(path).expand_path(root)
       end
     end
@@ -91,10 +91,6 @@ module Bundler
       Pathname.new(bundle_path).join("bundler")
     end
 
-    def gem_install_path
-      Pathname.new(bundle_path).join("#{Gem.ruby_engine}/#{Gem::ConfigMap[:ruby_version]}")
-    end
-
     def install_path
       home.join("gems")
     end
@@ -119,10 +115,10 @@ module Bundler
 
     def configure_gem_home_and_path
       if settings[:disable_shared_gems]
-        ENV['GEM_HOME'] = File.expand_path(gem_install_path, root)
+        ENV['GEM_HOME'] = bundle_path.to_s
         ENV['GEM_PATH'] = ''
       else
-        gem_home, gem_path = gem_install_path.to_s, Gem.path
+        gem_home, gem_path = bundle_path.to_s, Gem.path
         ENV["GEM_PATH"] = [gem_home, gem_path].flatten.compact.join(File::PATH_SEPARATOR)
         ENV["GEM_HOME"] = bundle_path.to_s
       end

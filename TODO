@@ -1,0 +1,16 @@
+  jeremy@foo answers (rails3b) $ bundle check
+  The following dependencies are missing
+    * rack-openid (>= 0.2.2, runtime)
+    * thinking-sphinx (>= 1.3, runtime)
+    * will_paginate (>= 2.3, runtime)
+    * cached_externals (= 1.0.0, runtime)
+    * sprockets (= 1.0.2, runtime)
+  jeremy@foo answers (rails3b) $ bundle install
+  Source: Cloning `git://github.com/josh/sprockets.git`... /usr/local/ruby/1.8.8dev/lib/ruby/1.8/fileutils.rb:243:in `mkdir': Permission denied - /usr/local/ruby/1.8.8dev/lib/ruby/gems/1.8/bundler (Errno::EACCES)
+
+  * catch Permission denied
+
+jeremy@foo answers (rails3b) $ bundle pack
+Could not find gem 'rails (= 3.0.pre, runtime)' in git://github.com/rails/rails.git
+
+  * Say "run bundle install first" if bundle pack can't find the gems

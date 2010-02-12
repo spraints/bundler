@@ -30,7 +30,7 @@ module Bundler
         gem_path  = Gem::RemoteFetcher.fetcher.download(spec, uri, destination)
         Bundler.ui.debug "  * Installing"
         installer = Gem::Installer.new gem_path,
-          :install_dir         => Bundler.gem_install_path.to_s,
+          :install_dir         => Gem.dir,
           :ignore_dependencies => true,
           :wrappers            => true,
           :env_shebang         => true,
@@ -118,7 +118,7 @@ module Bundler
 
         Bundler.ui.debug "  * Installing from pack"
         installer = Gem::Installer.new "#{@path}/#{spec.full_name}.gem",
-          :install_dir         => Bundler.gem_install_path.to_s,
+          :install_dir         => Gem.dir,
           :ignore_dependencies => true,
           :wrappers            => true,
           :env_shebang         => true,
